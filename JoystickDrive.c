@@ -44,8 +44,20 @@ void cascadetop (int speed) {
 	motor[r_cascade_top] = speed;  //when joystick channel 4 on partner joystick moved top moves
 }
 void clawflip () {
-	motor[claw] = vexRT[Btn6UXmtr2];  //joystick button 6 on partner joystick is held and claw moves
+	if (vexRT[Btn6UXmtr2] == 1)      //If button 6U is pressed...
+	{
+		motor[claw] = 127; 	//... the claw spin
+	}
+	else if(vexRT[Btn6DXmtr2] == 1)  //Else, if button 6D is pressed...
+	{
+		motor[claw] = -127; 	//...lower the claw
+	}
+	else                      	//Else (neither button is pressed)...
+	{
+		motor[claw] = 0;     //...stop the claw
+	}
 }
+
 task main()
 {
 while (1==1){                        //all on one joystick
