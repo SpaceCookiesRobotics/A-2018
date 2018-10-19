@@ -1,13 +1,13 @@
 #pragma config(Motor,  port1,           claw,          tmotorVex393_HBridge, openLoop)
 #pragma config(Motor,  port2,           r_drive,       tmotorVex393_MC29, openLoop, reversed)
 #pragma config(Motor,  port3,           l_drive,       tmotorVex393_MC29, openLoop)
-#pragma config(Motor,  port4,           l_puncher,     tmotorNone, openLoop)
+#pragma config(Motor,  port4,           l_puncher,     tmotorVex393_MC29, openLoop, reversed)
 #pragma config(Motor,  port5,           r_puncher,     tmotorVex393_MC29, openLoop)
 #pragma config(Motor,  port6,           tread,         tmotorVex393_MC29, openLoop, reversed)
 #pragma config(Motor,  port7,           l_cascade_top, tmotorVex393_MC29, openLoop, reversed)
-#pragma config(Motor,  port8,           l_cascade_bot, tmotorVex393_MC29, openLoop)
+#pragma config(Motor,  port8,           r_cascade_bot, tmotorVex393_MC29, openLoop, reversed)
 #pragma config(Motor,  port9,           r_cascade_top, tmotorVex393_MC29, openLoop, reversed)
-#pragma config(Motor,  port10,          r_cascade_bot, tmotorVex393_HBridge, openLoop, reversed)
+#pragma config(Motor,  port10,          l_cascade_bot, tmotorVex393_HBridge, openLoop)
 
 void setleft (int speed){
 	motor[l_drive]=speed;
@@ -37,11 +37,11 @@ void puncher () {
 void tanktread () {
 	motor[tread] = vexRT[Ch2];
 }
-void cascadebottom (int speed) {
+void cascadesecond (int speed) {
 	motor[l_cascade_bot] = speed;       // when partner joystick channel 3 on moves second stage moves
 	motor[r_cascade_bot] = speed;
 }
-void cascadetop (int speed) {
+void cascadefirst (int speed) {
 	motor[r_cascade_top] = speed;  //when partner joystick channel 2 moves third stage moves
 	motor[l_cascade_bot] = speed;
 }
@@ -67,8 +67,8 @@ while (1==1){
 	setright(vexRT[Ch3]-vexRT[Ch4]);   //vertical - horizontal
 	puncher ();
 	tanktread ();
-	cascadebottom ( vexRT[Ch3Xmtr2]);  //all on partner joystick
-	cascadetop (vexRT[Ch2Xmtr2]);
+	cascadesecond ( vexRT[Ch3Xmtr2]);  //all on partner joystick
+	cascadefirst (vexRT[Ch2Xmtr2]);
 	clawflip ();
 }
 }
