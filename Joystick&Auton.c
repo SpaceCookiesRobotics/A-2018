@@ -86,7 +86,11 @@ void puncher () {
 	}
 }
 void tanktread () {
-	motor[tread] = vexRT[Ch2];
+	if (vexRT[Btn6U] == 1)      //If button 6U is pressed...
+	{
+		motor[tread] = 127; 	//... the claw spin
+	}
+
 }
 void cascadesecond (int speed) {
 	motor[l_cascade_bot] = speed;       // when partner joystick channel 3 on moves second stage moves
@@ -114,8 +118,8 @@ void clawflip () {
 void joystick()
 {
 while (1==1){
-	setleft (vexRT[Ch3]+vexRT[Ch4]);   //vertical + horizontal
-	setright(vexRT[Ch3]-vexRT[Ch4]);   //vertical - horizontal
+	motor[l_drive] = vexRT[Ch3];
+	motor[r_drive] = vexRT[Ch2];
 	puncher ();
 	tanktread ();
 	cascadesecond ( vexRT[Ch3Xmtr2]);  //all on partner joystick
