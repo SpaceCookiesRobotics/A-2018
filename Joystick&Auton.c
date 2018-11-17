@@ -26,11 +26,19 @@ void drive (int s, int time){
 	setright(s);
 	wait1Msec(time);
 }
-void autonomous() //auton flips low flag
+
+void puncherauton (int time) {
+	motor [lpuncher]=127;
+	motor [rpuncher]=127;
+	waitMsec (time);
+}
+
+void autonomous() //auton punches ball annd flips low flag
 {
-drive (127, 2000);
-drive (-127, 1000);
-drive (0, 5000);
+	puncherauton (2000);
+	drive (127, 2000);
+	drive (-127, 1000);
+	drive (0, 5000);
 }
 
 
