@@ -13,7 +13,6 @@
 void setleft (int speed){
 	motor[l_drive]=speed;
 }
-
 void setright (int speed){
 	motor[r_drive]=speed;
 }
